@@ -6,9 +6,9 @@
     <p>counter: {{ people.length }}</p>
 
     <ol>
-      <li v-for="person in people" v-on:click="toggleHide()">
+      <li v-for="person in people" v-on:click="toggleBioVisible(person)">
         full_name: {{ person.full_name }},
-        bio: {{ person.bio }}
+        <p v-if="person.bioVisible">bio: {{ person.bio }}</p>
         <button v-on:click="removePerson(person.id)">Remove this Person</button>
       </li>
     </ol>
@@ -51,9 +51,11 @@ export default {
       var index = this.people.indexOf(inputPerson);
       this.people.pop(index);
     },
-    toggleHide: function () {
-      var liTag = document.querySelector('li');
-      liTag.classList.toggle('hidden');
+    toggleBioVisible: function (inputPerson) {
+      console.log('toggle bioVisible');
+      inputPerson.bioVisible = !inputPerson.bioVisible;
+      // var liTag = document.querySelector('li');
+      // liTag.classList.toggle('hidden');
     }
   },
   computed: {}
