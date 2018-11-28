@@ -6,7 +6,7 @@
     <p>counter: {{ people.length }}</p>
 
     <ol>
-      <li v-for="person in people" v-on:click="toggleBioVisible(person)">
+      <li v-for="person in filterBy(people, 'Christine', 'full_name')" v-on:click="toggleBioVisible(person)">
         full_name: {{ person.full_name }},
         <p v-if="person.bioVisible">bio: {{ person.bio }}</p>
         <button v-on:click="removePerson(person.id)">Remove this Person</button>
@@ -28,7 +28,10 @@
 </style>
 
 <script>
+import Vue2Filters from "vue2-filters";
+
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "People App",
