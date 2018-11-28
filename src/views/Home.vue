@@ -14,8 +14,14 @@
       </span>
     </datalist>
 
+    <div class="">
+      <button v-on:click="setSortAttribute('full_name')">Sort by Name</button>
+      <button v-on:click="setSortAttribute('bio')">Sort by Bio</button>
+    </div>
+
     <ol>
-      <li v-for="person in filterBy(people, nameFilter, 'full_name', 'bio')" v-on:click="toggleBioVisible(person)">
+      <li v-for="person in orderBy(filterBy(people, nameFilter, 'full_name', 'bio'),sortAttribute, -1)"
+        v-on:click="toggleBioVisible(person)">
         full_name: {{ person.full_name }},
         <p v-if="person.bioVisible">bio: {{ person.bio }}</p>
         <button v-on:click="removePerson(person.id)">Remove this Person</button>
@@ -50,7 +56,8 @@ export default {
         {full_name: "Christine", bio: "likes cherries", bioVisible: true}
       ],
       newPerson: {full_name: "", bio: "", bioVisible: true},
-      nameFilter: ''
+      nameFilter: '',
+      sortAttribute: ''
     };
   },
   created: function() {},
@@ -69,6 +76,9 @@ export default {
       inputPerson.bioVisible = !inputPerson.bioVisible;
       // var liTag = document.querySelector('li');
       // liTag.classList.toggle('hidden');
+    },
+    setSortAttribute: function(inputAttribute) {
+      this.sortAttribute = inputAttribute;
     }
   },
   computed: {}
