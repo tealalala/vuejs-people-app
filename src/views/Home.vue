@@ -5,8 +5,17 @@
     <!-- People List -->
     <p>counter: {{ people.length }}</p>
 
+    Search: <input v-model="nameFilter" list="names">
+
+    <datalist id="names">
+      <span v-for="person in people">
+        <option>{{ person.full_name }}</option>
+        <option>{{ person.bio }}</option>
+      </span>
+    </datalist>
+
     <ol>
-      <li v-for="person in filterBy(people, 'Christine', 'full_name')" v-on:click="toggleBioVisible(person)">
+      <li v-for="person in filterBy(people, nameFilter, 'full_name', 'bio')" v-on:click="toggleBioVisible(person)">
         full_name: {{ person.full_name }},
         <p v-if="person.bioVisible">bio: {{ person.bio }}</p>
         <button v-on:click="removePerson(person.id)">Remove this Person</button>
@@ -40,7 +49,8 @@ export default {
         {full_name: "Betsy", bio: "likes buttons", bioVisible: true},
         {full_name: "Christine", bio: "likes cherries", bioVisible: true}
       ],
-      newPerson: {full_name: "", bio: "", bioVisible: true}
+      newPerson: {full_name: "", bio: "", bioVisible: true},
+      nameFilter: ''
     };
   },
   created: function() {},
