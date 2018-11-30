@@ -51,7 +51,7 @@ export default {
     return {
       message: "People App",
       people: [
-        {full_name: "Abby", bio: "likes apples", bioVisible: true},
+        {full_name: "Abby", bio: "loves apples", bioVisible: true},
         {full_name: "Betsy", bio: "likes buttons", bioVisible: true},
         {full_name: "Christine", bio: "likes cherries", bioVisible: true}
       ],
